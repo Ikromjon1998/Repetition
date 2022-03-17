@@ -2,6 +2,8 @@
 
 const dayjs = require ("dayjs");
 
+const localizedFormat = require('dayjs/plugin/localizedFormat');
+dayjs.extend(localizedFormat);
 // const locale_de = require('dayjs/locale/de');
 // dayjs.extend(locale_de);
 
@@ -26,10 +28,20 @@ function Film(id, title, isfavorite = false, date="", score=0){
         return this.date ? this.date.format(format) : '<not defined>';
     }
     let visable = true;
+
+    this._formatRating= () =>{
+        return this.rating ? this.rating : '<not assigned>';
+    } 
 }
 
 function FilmLibrary (){
     this.list = [];
+
+    this.print = () => {
+        console.log("***** List of Films *****");
+        this.list.forEach((item) => console.log(item.toString()));
+    }
+
 
     this.addNewFilm = (film) =>{
         if(!this.list.some(f => f.id == film.id)){
@@ -47,17 +59,41 @@ function FilmLibrary (){
         })
     }
     this.deleteFilm = (id) => {
-        this.list.filter((film) => id = film.id).visable = false;
-
-        return this.list.filter((film) => id != film.id)   
-    } 
-    this.resetWatchedFilm = () => {
-        return [...this.list].forEach((film) => {
-            film.Date = "";
+        const new_list = this.list.filter(function(film, index, arr) {
+          return film.id !== id;
         })
+        this.list = new_list;
+    }
+    // this.deleteFilm = (id) => {
+    //     this.list.filter((film) => id = film.id).visable = false;
+
+    //     return this.list.filter((film) => id != film.id)   
+    // } 
+    this.resetWatchedFilm = () => {
+        // return [...this.list].forEach((film) => {
+        //     film.Date = "";
+        // })// don't need return
+        this.list.forEach((film) => film.watchDate = '');
     }
     this.getRated = () => {
-        return this.list.filter((film) => film.rating);
+        const new_list = this.list.filter(function(film, index, arr) {
+          return film.rating > 0;
+        })
+        return new_list;
+    }
+    this.sortByDate = () => {
+        const new_array = [...this.list];
+        new_array.sort((f1, f2) => {
+          if(f1.watchDate === f2.watchDate)
+            return 0;    // works also for null === null
+          else if(f1.watchDate === null || f1.watchDate === '')
+            return 1;    // null/empty watchDate is the lower value
+          else if(f2.watchDate === null || f2.watchDate === '')
+            return -1;
+          else
+            return f1.watchDate.diff(f2.watchDate)
+        });
+        return new_array;
     }
 
 
@@ -90,6 +126,25 @@ function main(data){
     sortAndPrint(filmLibrary);
 
     // filterAndPrint();
+
+    // Print Sorted films
+  console.log("***** List of Films sorted by watchDate *****");
+  const sorted_films = library.sortByDate();
+  sorted_films.forEach((film) => console.log(film.toString()));
+
+  // Deleting film #3
+  library.deleteFilm(3);
+
+  // Reset dates
+  library.resetWatchedFilms();
+
+  // Printing modified Library
+  library.print();
+
+  // Retrieve and print films with an assigned rating
+  console.log("***** Films filtered, only the rated ones *****");
+  const rated_films = library.getRated();
+  rated_films.forEach((film) => console.log(film.toString()));
 
     debugger;
 }
