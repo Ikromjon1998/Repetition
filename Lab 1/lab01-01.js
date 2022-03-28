@@ -140,6 +140,7 @@ function main(data){
 
   // Printing modified Library
   library.print();
+  
 
   // Retrieve and print films with an assigned rating
   console.log("***** Films filtered, only the rated ones *****");
