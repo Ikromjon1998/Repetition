@@ -1,0 +1,107 @@
+/* Global */
+.vheight-100 {
+    min-height: 100vh;
+}
+
+.below-nav {
+    padding-top: 5rem;
+}
+
+/* Filters and projects */
+.list-group-item {
+    background-color: transparent;
+}
+
+.list-group-item.active {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.list-group-item-action:hover {
+    background-color: #9becae;
+}
+
+.projects-title {
+    margin-top: 2rem;
+}
+
+/* Class for important tasks */
+.important {
+    color: red;
+}
+
+/* Add task button */
+.fixed-right-bottom {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1030;
+    margin: 0 1.5rem 1.5rem 0;
+    border-radius: 50%;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 1em;
+    font-size: 1vw;
+    color: #FFD600;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+
+body {
+    background: #0c82f032;
+    color: white
+}
+
+h1,
+p {
+    text-align: right
+
+}
+
+h1 {
+    margin-top: 150px
+}
+
+p {
+    font-size: 1.2rem
+}
+
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 14px
+    }
+
+    p {
+        font-size: 12px
+    }
+}
