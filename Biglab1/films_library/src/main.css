@@ -1,0 +1,64 @@
+.navigation {
+    background-color: #004B96;
+    color: white;
+}
+
+.bottomRight {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    height: 50px;
+    float: right;
+    clear: right;
+    margin-bottom: 10px;
+}
+
+.vheight-100 {
+    min-height: 100vh;
+}
+
+.below-nav {
+    padding-top: 4rem;
+}
+
+.list-group-item {
+    background-color: transparent;
+}
+
+.list-group-item.active {
+    background-color: #004B96;
+    border-color: #004B96;
+}
+
+#left-sidebar {
+    height: 100vh;
+}
+
+.important {
+    color: red;
+}
+
+
+/*
+.custom-collapse .collapse {
+    display: block;
+}
+.list-group-item {
+    background-color: transparent;
+}
+.list-group-item.active {
+    background-color: #004B96;
+    border-color: #004B96;
+}
+  
+.list-group-item-action:hover {
+    background-color: #004B96;
+    color: white;
+}
+.container-fluid .row {
+    padding: 0px;
+}
+.button:active {
+    background-color: black;
+}
+*/ 
